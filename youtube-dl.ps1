@@ -46,6 +46,9 @@ if(-not (Test-Path $path/data/log-$logDate.log)){
     New-Item "$path/data/log-$logDate.log" -Force
 }
 
+# Update youtube-dl
+youtube-dl -U
+
 # Download and convert files
 youtube-dl --playlist-reverse --o "$path/data/%(id)s.%(ext)s" --download-archive "$path/downloaded.txt" --no-overwrites --extract-audio --audio-format mp3 --audio-quality 0 --prefer-ffmpeg --write-description --write-info-json --write-thumbnail --dateafter $feedDate -a "$path/channels.txt" -v | Out-File "$path/data/log-$logDate.log" -Append
 
