@@ -43,6 +43,9 @@ logDate=$(date +%Y%m%d)
 feedDate=$(date +%Y%m%d -d "-1 month")
 path="/var/www/YTDL"
 
+# Update youtube-dl
+youtube-dl -U
+
 # Download and convert files
 youtube-dl --playlist-reverse --o "$path/data/%(id)s.%(ext)s" --download-archive "$path/downloaded.txt" --no-overwrites --extract-audio --audio-format mp3 --audio-quality 0 --prefer-ffmpeg --write-description --write-info-json --write-thumbnail --dateafter $feedDate -a "$path/channels.txt" -v >> "$path/data/log-$logDate.log"
 
