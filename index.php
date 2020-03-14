@@ -22,14 +22,15 @@ $json_a = json_decode($filecontents, true);
 
 $link    = $baseUrl . 'data/' . $json_a['id'] . ".mp3";
 $image    = $baseUrl . 'data/' . $json_a['id'] . ".jpg";
-$pubdate = DateTime::createFromFormat('Ymd', $json_a['upload_date']);
 
 $output .= '<item>';
 $output .= '<title>' . htmlspecialchars($json_a['title']) . '</title>';
 $output .= '<description>' . htmlspecialchars($json_a['description']) . '</description>';
 $output .= '<link>' . $link . '</link>';
 $output .= '<enclosure url="' . $link . '" length="' . $json_a['filesize'] . '" type="audio/mpeg"/>';
-$output .= '<pubDate>' . $pubdate->format('r') . '</pubDate>';
+if (!is_null($json_a['upload_date'])) {
+	$output .= '<pubDate>' . DateTime::createFromFormat('Ymd', $json_a['upload_date'])->format('r') . '</pubDate>';
+}
 $output .= '<itunes:duration>' . $json_a['duration'] . '</itunes:duration>';
 $output .= '<itunes:image href="' . $image . '" />';
 $output .= '</item>';
