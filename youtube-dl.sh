@@ -50,7 +50,7 @@ youtube-dl -U
 youtube-dl --playlist-reverse --o "$path/data/%(id)s.%(ext)s" --download-archive "$path/downloaded.txt" --no-overwrites --extract-audio --audio-format mp3 --audio-quality 0 --prefer-ffmpeg --write-description --write-info-json --write-thumbnail --dateafter $feedDate -a "$path/channels.txt" -v >> "$path/data/log-$logDate.log"
 
 # Remove files older than 60 days
-find $path/data/ -mtime +60 -type -delete f >> "$path/data/log-$logDate.log"
+find $path/data/ -mtime +60 -type f -delete >> "$path/data/log-$logDate.log"
 
 
 
